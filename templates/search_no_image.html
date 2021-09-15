@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <title>The Nexus | Search</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="static/css/styles.css">
+    
+    <style>
+        body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+        html {
+            overflow: hidden;
+            height: 100%;
+        }
+        body {
+            overflow: auto;
+            height: 100%;
+        }
+        .bgimg {
+            background-image: url('static/img/wallpaper.png');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        input[type=text] {
+            height: 46px;
+        }
+        .blocktitle {
+            line-height:6vw;
+        }
+        @media only screen and (min-width: 0px) {
+            .blocktitle {
+                line-height:100%;
+            }
+        }
+        @media only screen and (min-width: 600px) {
+            .blocktitle {
+                line-height:100%;
+            }
+        }
+        @media only screen and (min-width: 1080px) {
+            .blocktitle {
+                line-height:100%;
+            }
+        }
+    </style>
+
+    <body class="w3-light-grey bgimg">
+        <div class="w3-content" style="max-width:1400px;">
+
+            <!-- Header -->
+            <header class="w3-container w3-center w3-padding-32"> 
+                <a href="/"><img src="static/img/logo.png" alt="logo" style="width:90%;"></a>
+            </header>
+
+            <br>
+
+            <!-- Results -->
+            <div class="w3-row">
+                <div class="w3-col l4 m6 s12">
+                    <form action='search' method='post'>
+                        <table class="w3-table">
+                            <tr>
+                                <td><input style="width:100%;;" type='text' name='search' autocomplete='off' value="{{ searchTerm }}"></td>
+                                <td><button style="" type='submit' name='submit' value='SEARCH' class='main-btn noselect'>SEARCH</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="w3-col l8 m6 s12">
+                    <h3 style="color: white; text-align: center;">{{ numResults }} Results Found</h3>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-col l4 s12">
+                    <!-- About -->
+                    <a href="https://en.wikipedia.org/wiki/{{ searchTerm }}" style="text-decoration: none;">
+                        <div class="w3-card-4 w3-margin w3-white">
+                            <div class="w3-container">
+                                <p>{{ desc }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="w3-col l8 s12">
+                    {% for result in resultData %}
+                        <div class="w3-card-4 w3-margin w3-white">
+                            <div class="w3-container" style="">
+                                <br style="line-height: 0.0000001%;">
+                                <a href="{{ result['link'] }}" style="text-decoration: none !important; line-height:0.2vw;">
+                                    <h7 style=" word-wrap: break-word;">{{  result['link'] }}</h7>
+                                    <h3><b class="blocktitle">{{  result['title'] }}</b></h3>
+                                    <p style="line-height:3vh;">{{ result['description'] }}<br>{{ result['pubDate'] }}</p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+        </div>
+    </body>
+</html>
